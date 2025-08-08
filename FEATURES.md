@@ -5,7 +5,7 @@ This document provides a comprehensive overview of all features extracted by the
 ## Overview
 
 The URL Classifier analyzes **38 features** extracted from URLs, categorized into two main types:
-- **37 Lexical Features**: Based on URL text analysis
+- **36 Lexical Features**: Based on URL text analysis
 - **2 Host-based Features**: Based on domain registration information
 
 ---

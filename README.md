@@ -40,8 +40,8 @@ The API will be available at `http://localhost:5000`
 ## API Usage
 
 ### Base URL
-- **Live API**: Coming soon (will be deployed)
-- **Local Testing**: `http://localhost:5000` (see Development section below)
+- **Production API**: `https://url-classifier-api.onrender.com`
+- **Local Development**: `http://localhost:5000`
 
 ### Endpoint
 

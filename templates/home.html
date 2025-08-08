@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Classifier API</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 50px auto; 
+            padding: 20px; 
+            line-height: 1.6;
+        }
+        .error { 
+            color: #721c24; 
+            font-size: 1.1em; 
+            margin-bottom: 25px;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            border: 1px solid #f5c6cb;
+            border-left: 4px solid #dc3545;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(220, 53, 69, 0.15);
+            font-weight: 500;
+        }
+        .endpoint { 
+            background: #f8f9fa; 
+            padding: 15px; 
+            border-radius: 5px; 
+            margin: 10px 0; 
+            border-left: 4px solid #2980b9;
+        }
+        .example { 
+            background: #e8f5e8; 
+            padding: 15px; 
+            border-radius: 3px; 
+            font-family: monospace; 
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .json-example {
+            background: #e8f5e8; 
+            padding: 15px; 
+            border-radius: 3px; 
+            font-family: monospace; 
+            margin: 10px 0;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        .method { 
+            color: #2980b9; 
+            font-weight: bold; 
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .environment {
+            display: block;
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-size: 0.6em;
+            font-weight: bold;
+            margin: 0 auto 5px auto;
+            text-align: center;
+            width: fit-content;
+        }
+        .env-local {
+            background: #e8f5e8;
+            color: #27ae60;
+            border: 1px solid #27ae60;
+        }
+        .env-production {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffc107;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="environment {{ 'env-production' if environment == 'Production' else 'env-local' }}">
+       Current: {{ environment }}
+    </div>
+    
+    <div class="header">
+        <h1>🚨 URL Classifier API</h1>
+        <p>Using ML model trained on XGBoost supervised learning algorithm</p>
+    </div>
+
+    <div class="error">❌ Invalid route! Please use the correct API endpoint.</div>
+    
+    <h2>Correct Usage:</h2>
+    
+    <div class="endpoint">
+        <h3>📍 Endpoint: <code>/predict/</code></h3>
+        <p><strong>Methods:</strong> <span class="method">GET</span> and <span class="method">POST</span></p>
+        <p><strong>Description:</strong> Analyze URLs whether benign or malicious using XGBoost supervised learning algorithm</p>
+    </div>
+    
+    <h3>📝 Examples:</h3>
+    
+    <h4>Method 1: GET Request</h4>
+    <div class="example">
+        {{ base_url }}/predict/?url=https://www.google.com/
+    </div>
+    
+    <h4>Method 2: POST Request (Single URL - JSON)</h4>
+    <div class="example">
+        URL: {{ base_url }}/predict/<br>
+        Headers: Content-Type: application/json<br>
+        Body: {"url": "https://www.google.com/"}
+    </div>
+    
+    <h4>Method 3: POST Request (Multiple URLs - JSON)</h4>
+    <div class="example">
+        URL: {{ base_url }}/predict/<br>
+        Headers: Content-Type: application/json<br>
+        Body: {"urls": ["https://www.google.com/", "https://www.opera.com/"]}
+    </div>
+    
+    <h4>Method 4: POST Request (Form Data)</h4>
+    <div class="example">
+        URL: {{ base_url }}/predict/<br>
+        Body: x-www-form-urlencoded<br>
+        Key: url, Value: https://www.google.com/
+    </div>
+    
+    <h3>📊 Response Format:</h3>
+    <div class="json-example">
+    [
+        {
+            "url": "https://www.google.com/",
+            "prediction": 0,
+            "malicious_probability": 0.1234,
+            "prediction_label": "benign",
+            "risk_level": "low"
+        }
+    ]
+    </div>
+    
+    <h3>📖 Documentation:</h3>
+    <p>For complete API documentation, examples, and feature details:</p>
+    <ul>
+        <li><a href="https://github.com/Lee-yah/URL-Classifier-API" target="_blank">📂 GitHub Repository</a></li>
+        <li><a href="https://github.com/Lee-yah/URL-Classifier-API/blob/master/README.md" target="_blank">📄 README.md</a></li>
+        <li><a href="https://github.com/Lee-yah/URL-Classifier-API/blob/master/FEATURES.md" target="_blank">🔍 FEATURES.md</a></li>
+    </ul>
+    
+    <div class="footer">
+        <p><em>This API is designed for educational and research purposes.</em></p>
+        <p>🛡️ Analyzes 38 features to classify URLs as benign or malicious</p>
+    </div>
+</body>
+</html>

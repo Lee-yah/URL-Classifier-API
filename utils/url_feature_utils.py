@@ -21,7 +21,7 @@ import time #time.sleep
 from tqdm import tqdm
 
 #FUNCTIONS
-#get 37 lexical features
+#37 lexical features
 def has_http_or_https(url):
     return 1 if url.startswith(('http://', 'https://')) else 0
 
