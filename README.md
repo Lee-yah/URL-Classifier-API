@@ -148,6 +148,12 @@ The API uses a trained machine learning model that analyzes 38 features extracte
 - **36 Lexical Features**: URL structure, character analysis, and content patterns
 - **2 Host-based Features**: Domain registration and expiration information
 
+### Performance:
+- **Current Model**: 3rd generation with 98.83% training accuracy
+- **Test Performance**: 98.9% malicious URL detection rate
+- **Algorithm**: XGBoost Classifier
+
+For detailed model performance metrics, dataset information, and training history, see [MODEL.md](MODEL.md).
 For detailed documentation of all features, see [FEATURES.md](FEATURES.md).
 
 ## Development

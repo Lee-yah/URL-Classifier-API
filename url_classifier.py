@@ -22,7 +22,9 @@ def url_classifier(df):
     df_38 = df.drop(columns=['short_urls', 'sus_match', 'url', 'count_tld'])
     df_url = df[['url']].reset_index(drop=True)
     
-    model_path = Path("URL_classification_model_BENIGN_MALICIOUS_3000k-Model_2-38_features-2nd_model.json")
+    #model = 'URL_classification_model_BENIGN_MALICIOUS_3000k-Model_2-38_features-2nd_model.json'
+    model = 'URL_classification_model_BENIGN_MALICIOUS_6000k-38_features-3rd_model.json'
+    model_path = Path(model)
     model_2 = joblib.load(model_path)
     
     # Predict labels and probabilities
