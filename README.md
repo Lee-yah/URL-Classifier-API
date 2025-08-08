@@ -160,6 +160,8 @@ The application runs in debug mode by default for easy testing and development.
 #### Production Deployment
 The `DEVELOPMENT_ENVIRONMENT=production` environment variable is required to disable debug mode in production.
 
+**Note**: The deployed API on Render is configured for automatic deployment. Any changes pushed to the branch connected to render will automatically trigger a rebuild and deployment.
+
 ## Dependencies
 
 Key dependencies include:
