@@ -150,15 +150,6 @@ The API uses a trained machine learning model that analyzes 38 features extracte
 
 For detailed documentation of all features, see [FEATURES.md](FEATURES.md).
 
-### Key Feature Types:
-- URL length and structure analysis
-- Character frequency analysis
-- Domain and subdomain characteristics
-- Path and query parameter analysis
-- Protocol and scheme validation
-- Suspicious content detection
-- Domain registration information
-
 ## Development
 
 ### Environment Configuration
