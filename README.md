@@ -158,9 +158,7 @@ For detailed documentation of all features, see [FEATURES.md](FEATURES.md).
 The application runs in debug mode by default for easy testing and development.
 
 #### Production Deployment
-The project owner will handle production deployment. The application is designed to automatically adapt to production environments when deployed.
-
-**Note**: This is a machine learning research project. For questions about the live API or commercial use, please contact the project owner.
+The `DEVELOPMENT_ENVIRONMENT=production` environment variable is required to disable debug mode in production.
 
 ## Dependencies
 
