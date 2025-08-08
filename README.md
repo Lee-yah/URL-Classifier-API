@@ -14,7 +14,7 @@ A REST API that uses machine learning to classify URLs as benign or malicious. T
 
 ### Prerequisites
 
-- Python 3.7 or higher
+- Python 3.13 or higher
 - pip package manager
 
 ### Setup
@@ -39,6 +39,10 @@ The API will be available at `http://localhost:5000`
 
 ## API Usage
 
+### Base URL
+- **Live API**: Coming soon (will be deployed)
+- **Local Testing**: `http://localhost:5000` (see Development section below)
+
 ### Endpoint
 
 ```
@@ -48,30 +52,46 @@ POST/GET /predict/
 ### Request Methods
 
 #### Method 1: GET Request (Single URL)
-```bash
-curl "http://localhost:5000/predict/?url=https://example.com"
+**Postman Setup:**
+- Method: `GET`
+- URL: `http://localhost:5000/predict/?url=https://example.com`
+
+#### Method 2: POST Request (Single URL - JSON)
+**Postman Setup:**
+- Method: `POST`
+- URL: `http://localhost:5000/predict/`
+- Headers: `Content-Type: application/json`
+- Body (raw JSON):
+```json
+{
+  "url": "https://example.com"
+}
 ```
 
-#### Method 2: POST Request (Single URL)
-```bash
-curl -X POST http://localhost:5000/predict/ \
-  -H "Content-Type: application/json" \
-  -d '{"url": "https://example.com"}'
-```
-
-#### Method 3: POST Request (Multiple URLs)
-```bash
-curl -X POST http://localhost:5000/predict/ \
-  -H "Content-Type: application/json" \
-  -d '{"urls": ["https://example.com", "https://test.com", "http://suspicious-site.com"]}'
+#### Method 3: POST Request (Multiple URLs - JSON)
+**Postman Setup:**
+- Method: `POST`
+- URL: `http://localhost:5000/predict/`
+- Headers: `Content-Type: application/json`
+- Body (raw JSON):
+```json
+{
+  "urls": [
+    "https://example.com",
+    "https://test.com", 
+    "http://suspicious-site.com"
+  ]
+}
 ```
 
 #### Method 4: POST Request (Form Data)
-```bash
-curl -X POST http://localhost:5000/predict/ \
-  -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "url=https://example.com"
-```
+**Postman Setup:**
+- Method: `POST`
+- URL: `http://localhost:5000/predict/`
+- Body: `x-www-form-urlencoded`
+- Key-Value: 
+  - Key: `url`
+  - Value: `https://example.com`
 
 ### Response Format
 
@@ -122,38 +142,41 @@ curl -X POST http://localhost:5000/predict/ \
 
 ## Model Information
 
-The API uses a trained machine learning model that analyzes 38 features:
+The API uses a trained machine learning model that analyzes 39 features extracted from URLs.
 
-### Lexical Features (37)
+### Feature Categories:
+- **37 Lexical Features**: URL structure, character analysis, and content patterns
+- **2 Host-based Features**: Domain registration and expiration information
+
+For detailed documentation of all features, see [FEATURES.md](FEATURES.md).
+
+### Key Feature Types:
 - URL length and structure analysis
 - Character frequency analysis
 - Domain and subdomain characteristics
 - Path and query parameter analysis
 - Protocol and scheme validation
-
-### Host-based Features (2)
+- Suspicious content detection
 - Domain registration information
-- Host-related security indicators
 
 ## Development
 
-### Running in Debug Mode
+### Environment Configuration
 
-The application runs in debug mode by default. For production deployment, modify `app.py`:
+#### Local Development
+The application runs in debug mode by default for easy testing and development.
 
-```python
-if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=5000)
-```
+#### Production Deployment
+The project owner will handle production deployment. The application is designed to automatically adapt to production environments when deployed.
+
+**Note**: This is a machine learning research project. For questions about the live API or commercial use, please contact the project owner.
 
 ## Dependencies
 
 Key dependencies include:
 - **Flask**: Web framework
 - **pandas**: Data manipulation
-- **scikit-learn/joblib**: Machine learning model loading
-- **beautifulsoup4**: HTML parsing
-- **dnspython**: DNS resolution
+- **scikit-learn**: Machine learning model loading
 - **python-whois**: Domain information retrieval
 
 See `requirements.txt` for the complete list.
