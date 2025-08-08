@@ -1,0 +1,167 @@
+# URL Classifier API
+
+A REST API that uses machine learning to classify URLs as benign or malicious. The API analyzes 38 features extracted from URLs to predict their safety level and provides risk assessment.
+
+## Features
+
+- **URL Classification**: Classifies URLs as benign or malicious using a trained machine learning model
+- **Risk Assessment**: Provides risk levels (low, medium, high) based on malicious probability
+- **Feature Extraction**: Extracts 38 lexical and host-based features from URLs
+- **Flexible Input**: Supports single URL or multiple URLs in one request
+- **RESTful API**: Easy-to-use REST endpoints with JSON responses
+
+## Installation
+
+### Prerequisites
+
+- Python 3.7 or higher
+- pip package manager
+
+### Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Lee-yah/URL-Classifier-API.git
+   cd URL-Classifier-API
+   ```
+
+2. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Run the application**
+   ```bash
+   python app.py
+   ```
+
+The API will be available at `http://localhost:5000`
+
+## API Usage
+
+### Endpoint
+
+```
+POST/GET /predict/
+```
+
+### Request Methods
+
+#### Method 1: GET Request (Single URL)
+```bash
+curl "http://localhost:5000/predict/?url=https://example.com"
+```
+
+#### Method 2: POST Request (Single URL)
+```bash
+curl -X POST http://localhost:5000/predict/ \
+  -H "Content-Type: application/json" \
+  -d '{"url": "https://example.com"}'
+```
+
+#### Method 3: POST Request (Multiple URLs)
+```bash
+curl -X POST http://localhost:5000/predict/ \
+  -H "Content-Type: application/json" \
+  -d '{"urls": ["https://example.com", "https://test.com", "http://suspicious-site.com"]}'
+```
+
+#### Method 4: POST Request (Form Data)
+```bash
+curl -X POST http://localhost:5000/predict/ \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "url=https://example.com"
+```
+
+### Response Format
+
+#### Successful Response
+
+```json
+[
+  {
+    "url": "https://example.com",
+    "prediction": 0,
+    "malicious_probability": 0.1234,
+    "prediction_label": "benign",
+    "risk_level": "low"
+  },
+  {
+    "url": "http://suspicious-site.com",
+    "prediction": 1,
+    "malicious_probability": 0.8765,
+    "prediction_label": "malicious",
+    "risk_level": "high"
+  }
+]
+```
+
+#### Error Response
+
+```json
+{
+  "error": "Cannot extract data. Use correct syntax or keyword"
+}
+```
+
+### Response Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `url` | string | The analyzed URL |
+| `prediction` | integer | Binary prediction (0 = benign, 1 = malicious) |
+| `malicious_probability` | float | Probability of the URL being malicious (0.0-1.0) |
+| `prediction_label` | string | Human-readable prediction ("benign" or "malicious") |
+| `risk_level` | string | Risk assessment ("low", "medium", "high") |
+
+### Risk Level Classification
+
+- **Low Risk**: malicious_probability < 0.5
+- **Medium Risk**: 0.5 ≤ malicious_probability < 0.85
+- **High Risk**: malicious_probability ≥ 0.85
+
+## Model Information
+
+The API uses a trained machine learning model that analyzes 38 features:
+
+### Lexical Features (37)
+- URL length and structure analysis
+- Character frequency analysis
+- Domain and subdomain characteristics
+- Path and query parameter analysis
+- Protocol and scheme validation
+
+### Host-based Features (2)
+- Domain registration information
+- Host-related security indicators
+
+## Development
+
+### Running in Debug Mode
+
+The application runs in debug mode by default. For production deployment, modify `app.py`:
+
+```python
+if __name__ == '__main__':
+    app.run(debug=False, host='0.0.0.0', port=5000)
+```
+
+## Dependencies
+
+Key dependencies include:
+- **Flask**: Web framework
+- **pandas**: Data manipulation
+- **scikit-learn/joblib**: Machine learning model loading
+- **beautifulsoup4**: HTML parsing
+- **dnspython**: DNS resolution
+- **python-whois**: Domain information retrieval
+
+See `requirements.txt` for the complete list.
+
+## Support
+
+For issues and questions, please open an issue on the GitHub repository.
+
+---
+
+**Note**: This API is designed for educational and research purposes. For production use, consider implementing additional security measures, rate limiting, and input validation.
