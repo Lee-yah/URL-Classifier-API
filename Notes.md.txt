@@ -1,0 +1,28 @@
+Create:
+- app.py
+- create script and everything to make app.py work
+- create : pyproject.toml 
+	by using this command: 
+		'ni pyproject.toml' or use poetry
+- add content to the .toml file
+- to list modules/packages run the ff:
+	'pip freeze > requirements.txt'
+- get list from requirements.txt' then make its list into acceptable format using this command in PowerShell:
+    - # Read requirements.txt and format for pyproject.toml
+    - Get-Content requirements.txt | ForEach-Object { "    `"$_`"," }
+    - content above copy to dependencies in .toml
+    
+- how to use poetry:
+	- pip install poetry
+	- poetry init (creates .toml file . you can delete .toml and create it using this command)
+
+- currently we are using poetry:
+	here are the poetry commands:
+	poetry install
+	# Add a new package (automatically updates pyproject.toml)
+	poetry add new-package-name
+
+	# Run your Python scripts
+	poetry run python your_script.py
+
+- comment out the last [build-system] if you want to use pip instead of poetry when installing python packages
