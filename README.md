@@ -142,10 +142,10 @@ POST/GET /predict/
 
 ## Model Information
 
-The API uses a trained machine learning model that analyzes 39 features extracted from URLs.
+The API uses a trained machine learning model that analyzes 38 features extracted from URLs.
 
 ### Feature Categories:
-- **37 Lexical Features**: URL structure, character analysis, and content patterns
+- **36 Lexical Features**: URL structure, character analysis, and content patterns
 - **2 Host-based Features**: Domain registration and expiration information
 
 For detailed documentation of all features, see [FEATURES.md](FEATURES.md).
