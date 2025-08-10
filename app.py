@@ -7,6 +7,7 @@ Created on Thu Aug  7 17:32:33 2025
 
 from flask import Flask, jsonify, render_template, request
 import pandas as pd
+import os
 import script as urlf
 import url_classifier as malwhere
 
@@ -41,7 +42,6 @@ def start():
     return jsonify(prediction.to_dict('records'))
 
 if __name__ == '__main__':
-    import os
     port = int(os.environ.get('PORT', 5000))
     debug_mode = os.environ.get('DEVELOPMENT_ENVIRONMENT') != 'production'
     app.run(debug=debug_mode, host='0.0.0.0', port=port)

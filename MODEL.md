@@ -2,7 +2,7 @@
 
 ## Current Model
 
-The API currently uses **Model 3rd**, which was selected as the production model because it achieved the **highest training accuracy of 98.83%** among all three model iterations.
+The API currently uses **Model 3rd**, which was selected as the production model because it achieved the **highest test accuracy (98.83%) from the 80/20 split and superior performance on two separate manual test cases** among all three model iterations.
 
 ## Dataset Information
 
@@ -12,24 +12,27 @@ The API currently uses **Model 3rd**, which was selected as the production model
 - **Model 3rd**: 6,000 URLs (3,000 benign + 3,000 malicious) - new balanced dataset (retrained)
 - **Source**: manualCollection and from numerous dataset mentioned in academic papers
 - **Features**: 38 features (36 lexical + 2 host-based)
+- **Train/Test Split**: 80/20 ratio (80% training, 20% testing)
 
 ### Test Dataset
 - **Source**: manualCollection and from academic mentioned datasets
 
-#### Test Set 1: Benign-focused Test
-- **Size**: 77 URLs (all benign)
-- **Purpose**: Benign model performance evaluation
+**Note**: These are additional manual test cases used to evaluate the final saved model performance beyond the standard 80/20 train/test split validation.
 
-#### Test Set 2: Mixed Classification Test  
+#### Test Set 1: Benign-focused Manual Test
+- **Size**: 77 URLs (all benign)
+- **Purpose**: Benign model performance evaluation on completely unseen real-world data
+
+#### Test Set 2: Mixed Classification Manual Test  
 - **Size**: 675 URLs
   - 123 benign URLs
   - 552 malicious URLs
-- **Purpose**: Overall model performance evaluation
+- **Purpose**: Overall model performance evaluation on completely unseen real-world data
 
 ## Model Performance Comparison
 
-| Model Version | Training Accuracy | Test Set 1 (77 Benign) | Test Set 2 (675 Mixed) |
-|---------------|-------------------|-------------------------|-------------------------|
+| Model Version | Test Accuracy (20% split) | Test Set 1 (77 Benign) | Test Set 2 (675 Mixed) |
+|---------------|----------------------------|-------------------------|-------------------------|
 | **Model 1st** | 98.00% | 66 benign, 11 misclassified | 657 correct (534 malicious + 123 benign) |
 | **Model 2nd** | 98.67% | 58 benign, 19 misclassified | 662 correct (539 malicious + 123 benign) |
 | **Model 3rd** ⭐ | **98.83%** | 68 benign, 9 misclassified | 669 correct (546 malicious + 123 benign) |
@@ -81,6 +84,26 @@ The model analyzes 38 features extracted from URLs:
 - Domain expiration data
 
 For detailed feature documentation, see [FEATURES.md](FEATURES.md).
+
+## Analysis & Visualizations
+
+### 39 Features Correlation Analysis
+![Feature Correlation Heatmap](images/feature_correlation_39_model1.png)
+*Feature correlation matrix showing the correlation patterns between 39 features, which informed the decision to exclude TLD features due to high correlation with other lexical features. This analysis led to the final 38 features used in the model. When features are highly correlated, they provide similar information, which can confuse the model and make it harder to determine which features are truly important. Removing highly correlated features reduces model complexity and improves performance by eliminating redundant information.*
+
+### Model Performance Analysis
+
+#### Feature Importance (Model 3rd)
+![Feature Importance](images/feature_importance_model3.png)
+*Top features contributing to Model 3rd classification decisions, showing the most influential URL characteristics.*
+
+#### Confusion Matrix (Model 3rd)
+![Confusion Matrix](images/confusion_matrix_model3.png)
+*Confusion matrix for Model 3rd showing classification performance on test data.*
+
+#### Confusion Matrix - Normalized (Model 3rd)
+![Confusion Matrix Normalized](images/confusion_matrix_normalized_model3.png)
+*Normalized confusion matrix showing percentage-based performance metrics.*
 
 ## Retraining Information
 

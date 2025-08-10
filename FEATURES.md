@@ -51,7 +51,7 @@ The URL Classifier analyzes **38 features** extracted from URLs, categorized int
 | 35 | `count_host_underscore` | Underscores in hostname | `sub_domain.example.com` → 1 |
 | 36 | `count_subdomains` | Number of subdomains | `mail.subdomain.example.com` → 2 |
 
-**Note**: `count_tld` was removed due to high correlation with `count_embed_domain` feature.
+**Note**: `count_tld` was removed due to high correlation with `count_embed_domain` feature. See correlation heatmap visualization in [MODEL.md](MODEL.md).
 
 ---
 
